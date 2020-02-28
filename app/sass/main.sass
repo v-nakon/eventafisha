@@ -1,0 +1,107 @@
+@import vars
+@import fonts
+@import libs
+
+ul, li
+  margin: 0
+  padding: 0
+  list-style: none
+.container_events
+	width: 1024px
+	margin: 20px auto 0 auto
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
+.event_card
+	display: flex
+	width: 30%
+	padding-bottom: 15px
+	border-bottom: 2px solid #dce3e7
+	margin-bottom: 30px
+.event_card_content
+	background-color: #fff
+	display: flex
+	flex-direction: column
+	width: 100%
+.block_event_img
+	overflow: hidden
+.event_card_img
+	max-width: 100%
+	height: auto
+	transition: 1s
+	cursor: pointer
+.event_card_img:hover
+	transform: scale(1.2)
+.event_card_title
+	font-size: 18px
+	font-weight: 600
+	line-height: 1.4
+	padding-top: $card-padding-top
+.card_icon_title
+	padding-top: $card-padding-top
+	display: flex
+	align-items: center
+.card_title
+	margin-left: 10px
+	font-size: 14px
+	font-weight: 500
+.event_card_desc
+	font-size: 13px
+	// line-height: 1
+	padding-top: $card-padding-top
+.event_card_cat
+	text-align: right
+	font-size: 15px
+	padding-top: $card-padding-top
+	color: #555
+.container_search
+	background-color: #F4F4F4
+.block_search_date
+	font-size: 14px
+	font-weight: 700
+	display: flex
+	width: 1024px
+	margin: auto
+.block_search_day
+	display: flex
+	height: 64px
+.item_search_date
+	display: flex
+	flex-direction: column
+	justify-content: center
+	align-items: center
+	padding: 10px
+	margin-right: 2px
+	cursor: pointer
+	background-color: white
+.name_day
+	// padding: 10px
+.count_day
+	font-size: 20px
+.red_text
+	color: red
+.block_datepicker
+	margin-left: 50px
+input[type=text]
+  width: 100px
+  padding: 8px 10px
+  margin: 8px 5px 8px 0
+  display: inline-block
+  border: 1px solid #ccc
+  box-sizing: border-box
+.btn_search
+	@include btn_submit
+.btn_search:hover
+	background-color: #961528
+.block_search_cat, .search_cats
+	display: flex
+.search_cat_title
+	font-size: 16px
+	font-weight: 700
+	margin-right: 15px
+.search_cat
+	margin: 0 4px
+	border-bottom: 1px dashed
+	cursor: pointer
+.search_cat:hover
+	color: red
