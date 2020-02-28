@@ -1,0 +1,81 @@
+@import vars
+@import fonts
+@import libs
+
+img, iframe
+    max-width: 100%
+.container
+    background-color: #F4F4F4
+.container_event_info
+    width: 750px
+    margin: auto
+.block_category
+    background-color: #9AABF3
+    color: #fff
+    padding: 3px 4px
+    letter-spacing: .5px
+    line-height: 12px
+    font-size: 8px
+    border-radius: 4px
+    width: -webkit-fit-content
+    width: -moz-fit-content
+    width: fit-content
+    font-size: 15px
+    padding: 6px 8px
+.event_title
+    font-size: 40px
+    font-weight: 600
+.container_top_tags
+    display: flex
+.tag_top
+   font-size: 18px
+   color: #9CA0B1
+   margin-right: 10px
+.main_img_event
+    margin: 20px 0
+.container_event_info hr
+    margin: 0
+.block_info
+    display: flex
+    align-items: center
+    padding: 10px
+    cursor: pointer
+.block_info:hover
+    background-color: #CCCEDA
+.info_icon_title
+    display: flex
+    width: 150px
+.info_icon
+    margin-right: 15px
+.info_title
+    text-transform: uppercase
+    color: #5D5D61
+.info_text
+    color: #5D5D61
+    overflow-wrap: break-word
+    word-wrap: break-word
+    word-break: keep-all
+    width: calc( 100% - 160px )
+.btn_buy_ticket
+	@include btn_submit
+.btn_buy_ticket:hover
+	opacity: 0.6
+.block_btn_buy
+    margin: 20px 0
+    display: flex
+    justify-content: center
+.container_bottom_tags
+    display: flex
+    margin: 20px 0
+.tag_bottom
+    // font-size: 20px
+    padding: 5px 7px
+    background-color: #666
+    color: #fff
+    margin-right: 10px
+@media (max-width: 750px)
+    .container_event_info
+        width: 95%
+@media (max-width: 500px)
+    .event_title
+        font-size: 30px
