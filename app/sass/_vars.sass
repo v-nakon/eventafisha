@@ -1,15 +1,28 @@
 // User variables:
 $card-padding-top: 10px
-
+$main-color: red
 @mixin btn_submit
   max-width: 150px
-  background-color: red
+  background-color: $main-color
   color: white
   padding: 9px 16px
   margin: 8px 0
   border: none
   cursor: pointer
-
+@mixin modal_content
+    background-color: #fefefe
+    margin: auto
+    padding: 20px
+    border: 1px solid #888
+@mixin flex-center
+    display: flex
+    justify-content: space-between
+    align-items: center
+@mixin for_textarea
+    padding: 3px 8px
+    border: 1px solid #ccc
+    border-radius: 4px
+    font-size: 12px
 // // Breakpoints mixin settings (node_modules/bootstrap/scss/mixins/_breakpoints.scss)
 // // Example: +media-breakpoint-down(xs) - ≥576px / +media-breakpoint-up(sm) - // ≤576px
 // // Default variables: node_modules/bootstrap/scss/_variables.scss

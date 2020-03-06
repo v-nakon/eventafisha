@@ -4,22 +4,138 @@
 
 @import event-page
 
+body
+	background-color: #f4f4f4
 ul, li
   margin: 0
   padding: 0
   list-style: none
-.container_events
+// MODAL INPUT CSS
+.form_group input[type=text],
+.form_group select,
+.form_group input[type=date],
+.form_group input[type=time],.form_group input[type=file],
+.form_group input[address],
+.form_group input[type=email]
+  padding: 3px 8px
+  display: inline-block
+  border: 1px solid #ccc
+  box-sizing: border-box
+  font-size: 12px
+textarea
+    @include for_textarea
+    height: 150px
+#modal_client_info
+    @include for_textarea
+    height: 60px
+.form_group label
+    font-size: 14px
+    margin-bottom: 0
+.form_group input[type=submit]
+    @include btn_submit
+    width: 100%
+.form_group
+	display: flex
+	flex-direction: column
+	margin-bottom: 5px
+// END MODAL INPUT CSS
+// MODAL CREATE EVENT
+/* The Modal (background) */
+.container_modal, .container_modal_moderation, .container_modal_error, .container_modal_notfound
+    display: none
+    position: fixed
+    z-index: 1
+    padding-top: 50px
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    overflow: auto
+    background-color: rgb(0,0,0)
+    background-color: rgba(0,0,0,0.4)
+
+/* Modal Content */
+.modal_content
+    @include modal_content
+    width: 60%
+.modal_content_moderation, .modal_content_error, .modal_content_notfound
+    @include modal_content
+    width: 50%
+/* The Close Button */
+.close_modal, .close_modal_moderation, .close_modal_error, .close_modal_notfound
+    color: #aaaaaa
+    float: right
+    font-size: 28px
+    font-weight: bold
+.close_modal:hover,
+.close_modal:focus,
+.close_modal_moderation:hover,
+.close_modal_moderation:focus,
+.close_modal_error:hover,
+.close_modal_error:focus,
+.close_modal_notfound:hover,
+.close_modal_notfound:focus
+    color: #000
+    text-decoration: none
+    cursor: pointer
+.modal_header
+    @include flex-center
+.modal_title
+    font-size: 18px
+#submit_create_event
+	@include btn_submit
+	width: 20%
+	margin-top: 10px
+	padding: 2px 16px
+	font-size: 14px
+#submit_create_event:hover
+	opacity: 0.7
+// END MODAL CREATE EVENT
+
+// VALIDATION
+.error_msg
+    color: red
+    font-size: 10px;
+
+// END VALIDATION
+header
+	background-color: black
+	height: 60px
+	display: flex
+	align-items: center
+.container_header a
+	text-decoration: none !important
+.container_main, .container_header
 	width: 1024px
+	margin: auto
+.container_header
+	display: flex
+	justify-content: space-between
+	align-items: center
+.header_logo
+	color: #ffffff
+	font-size: 28px
+	font-weight: 500
+.header_logo span, .footer_logo span 
+	color: $main-color
+.btn_add_event
+	@include btn_submit
+	padding: 5px 11px
+	font-size: 13px
+	margin: 0
+.btn_add_event:hover
+	opacity: 0.8
+.container_events
 	margin: 20px auto 0 auto
 	display: flex
 	flex-wrap: wrap
 	justify-content: space-between
 .event_card
 	display: flex
-	width: 30%
-	padding-bottom: 15px
-	border-bottom: 2px solid #dce3e7
+	width: 32%
 	margin-bottom: 30px
+	padding: 10px
+	background-color: #fff
 .event_card_content
 	background-color: #fff
 	display: flex
@@ -27,6 +143,10 @@ ul, li
 	width: 100%
 .block_event_img
 	overflow: hidden
+	height: 140px
+	display: flex
+	justify-content: center
+	align-items: center
 .event_card_img
 	max-width: 100%
 	height: auto
@@ -52,17 +172,23 @@ ul, li
 	// line-height: 1
 	padding-top: $card-padding-top
 .event_card_cat
+	flex: 1 0 auto
 	text-align: right
 	font-size: 15px
 	padding-top: $card-padding-top
 	color: #555
+	font-weight: 300
+.event_card_icon
+	min-width: 18px
+	width: 18px
+	height: 18px
 .container_search
 	background-color: #F4F4F4
-.block_search_date
+	margin-top: 20px
+.block_search_date_cat
 	font-size: 14px
 	font-weight: 700
 	display: flex
-	width: 1024px
 	margin: auto
 .block_search_day
 	display: flex
@@ -81,21 +207,18 @@ ul, li
 .count_day
 	font-size: 20px
 .red_text
-	color: red
-.block_datepicker
-	margin-left: 50px
-input[type=text]
-  width: 100px
-  padding: 8px 10px
-  margin: 8px 5px 8px 0
-  display: inline-block
-  border: 1px solid #ccc
-  box-sizing: border-box
+	color: $main-color
 .btn_search
 	@include btn_submit
-.btn_search:hover
-	background-color: #961528
-.block_search_cat, .search_cats
+.btn_search:hover,.btn_buy_ticket:hover
+	opacity: 0.5
+.block_search_cat
+	display: flex
+	align-items: center
+	justify-content: center
+	width: 100%
+	background-color: white
+.search_cats
 	display: flex
 .search_cat_title
 	font-size: 16px
@@ -106,4 +229,74 @@ input[type=text]
 	border-bottom: 1px dashed
 	cursor: pointer
 .search_cat:hover
-	color: red
+	color: $main-color
+.btn_buy_ticket
+	@include btn_submit
+	align-self: center
+.title_calendar
+	font-weight: 600
+.datepicker_btn
+	margin: 0 15px
+	cursor: pointer
+.datepicker_group
+	display: flex
+	align-items: center
+	width: 100%
+	background-color: white
+	padding: 8px
+.datepicker_input
+	border: none !important
+	padding: 0 !important
+	margin: 0 !important
+	font-size: 16px
+	background-color:rgba(0, 0, 0, 0) !important
+	margin: 0
+.block_search_title_city
+	background-color: white
+	margin-top: 5px
+.block_search_title_city #event_name, .block_search_title_city #city, .block_search_title_city input[type=text]
+	width: 100%
+	padding: 3px 15px
+	margin: 8px 5px 8px 5px
+	display: inline-block
+	border: 1px solid #ccc
+	box-sizing: border-box
+	max-width: 220px
+	font-size: 14px
+.block_search_title_city #city
+	margin: 8px 20px 8px 0
+.block_search_title_city .btn_search
+	font-size: 14px
+	padding: 4px 16px
+// style for datepicker
+.datepicker--day-name, .datepicker--cell.-current-
+    color: $main-color !important
+.datepicker--cell.-selected-
+	background: #E5EAEE !important
+	color: black !important
+.datepicker--pointer
+	display: none !important
+.datepicker--time-row input[type='range']:focus::-webkit-slider-thumb
+    background: $main-color !important
+    border-color: $main-color !important
+.datepicker--time-row input[type='range']:focus::-moz-range-thumb
+    background: $main-color !important
+    border-color: $main-color !important
+.datepicker--time-row input[type='range']:focus::-ms-thumb
+    background: $main-color !important
+    border-color: $main-color !important
+// end style for datepicker
+#pagination
+    display: flex
+    justify-content: center
+    padding: 0 0 30px 0
+footer
+	background-color: #75757A
+	width: 100%
+	height: 60px
+	@include flex-center
+	justify-content: center
+.footer_logo
+	color: #ffffff
+	font-size: 28px
+	font-weight: 500 
