@@ -238,6 +238,8 @@ header
 .datepicker_btn
 	margin: 0 15px
 	cursor: pointer
+	width: 24px
+	height: 24px
 .datepicker_group
 	display: flex
 	align-items: center
@@ -299,4 +301,68 @@ footer
 .footer_logo
 	color: #ffffff
 	font-size: 28px
-	font-weight: 500 
+	font-weight: 500
+
+@media (max-width: 1050px)
+	.container_main, .container_header
+		width: 95%
+@media (max-width: 840px)
+	.block_search_cat
+		flex-direction: column
+	.block_event_img
+		height: 100px
+	.event_card_desc
+		display: none
+	.event_card_cat
+		text-align: center
+	.modal_content
+		width: 90%
+	#submit_create_event
+		width: 40%
+	textarea
+		height: 100px
+	.modal_content_moderation, .modal_content_error, .modal_content_notfound
+		width: 90%
+@media (max-width: 640px)
+	.event_card
+		width: 48%
+	.block_search_day
+		display: none
+	.block_search_cat
+		flex-direction: row
+	.block_search_title_city #event_name, .block_search_title_city #city, .block_search_title_city input[type=text]
+		max-width: 35%
+		font-size: 12px
+		margin: 0 5px 5px 5px
+	.datepicker_btn
+		width: 20px
+		height: 20px
+	.btn_search
+		margin: 0 0 5px 5px
+@media (max-width: 500px)
+	.block_search_cat
+		flex-direction: column
+	.event_card_title
+		font-size: 16px
+	.card_title
+		font-size: 12px
+	.event_card_cat
+		font-size: 13px
+	.btn_buy_ticket
+		padding: 4px 12px
+	.container_search
+		margin-top: 10px
+	.search_cat_title, .title_calendar
+		font-size: 14px
+	.search_cat
+		font-size: 12px
+	.block_search_title_city #city
+		margin: 0
+		max-width: 48%
+	.event_card
+		width: 90%
+		margin-bottom: 15px
+	.container_events
+		justify-content: center
+	.event_card_desc
+		display: block
