@@ -227,3 +227,17 @@ let $btn = $('.datepicker_btn'),
 	  })
 	};
   
+
+  // Open the dropdown window
+  document.querySelector(".dropbtn").addEventListener("click", function() {
+  	document.querySelector(".dropdown_content").classList.toggle("show");
+    });
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+	if (!event.target.matches('.dropbtn')) {
+	  var dropdown = document.querySelector(".dropdown_content");
+		if (dropdown.classList.contains('show')) {
+			dropdown.classList.remove('show');
+		}
+	}
+  }
