@@ -10,11 +10,14 @@ axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
     setTitle(response.data);
     setDate(response.data);
     setLocation(response.data);
+    setCity(response.data);
     setPrice(response.data);
     setBuyLink(response.data);
     setDescription(response.data);
     setImg(response.data);
     setCategory(response.data);
+    setTopTags(response.data);
+    setBottomTags(response.data);
   })
   .catch(function (error) {
     // handle error
@@ -26,45 +29,67 @@ axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
 
  function setTitle(obj) {
      let title = obj.title;
-     let titleElement = document.querySelector(".event_main_title");
-     let titleBuyBox = document.querySelector(".buy_box_title");
+     let titleElement = document.querySelector(".event_title");
      titleElement.innerHTML = title;
-     titleBuyBox.innerHTML = title;
  }
  function setDate(obj) {
      let startDate = new Date(obj.start_date);
      let endDate = new Date(obj.end_date);
-     let dateElement = document.querySelector(".item_date");
+     let dateElement = document.querySelector("#event_date");
      dateElement.innerHTML = startDate.toLocaleDateString() + " - " + endDate.toLocaleDateString();
  }
- function setLocation(obj) {
-     let location = obj.address;
-     let locationElement = document.querySelector(".item_location");
-     locationElement.innerHTML = location;
+ function setCity(obj) {
+     let city = obj.city.title;
+     let cityElement = document.querySelector("#event_city");
+     cityElement.innerHTML = city;
  }
+ function setLocation(obj) {
+    let location = obj.address;
+    let locationElement = document.querySelector("#event_location");
+    locationElement.innerHTML = location;
+}
  function setPrice(obj) {
      let price = obj.cost;
-     let priceElement = document.querySelector(".buy_box_price");
+     let priceElement = document.querySelector("#event_price");
      priceElement.innerHTML = price;
  }
  function setBuyLink(obj) {
      let buyLink = obj.buy_link;
-     let buyBtn = document.querySelector(".buy_box_btn");
+     let buyBtn = document.querySelector(".btn_buy_ticket");
      buyBtn.addEventListener( "click" , () => window.open(buyLink));
  }
  function setDescription(obj) {
      let description = obj.desc;
-     let descriptionElement = document.querySelector(".event_description");
+     let descriptionElement = document.querySelector(".description_info");
      descriptionElement.innerHTML = description;
  }
  function setImg(obj) {
      let imgPath = obj.images;
-     console.log("https://eventafisha.com/storage/" + imgPath);
-     let imgElement = document.querySelector(".event_img");
+    //  console.log("https://eventafisha.com/storage/" + imgPath);
+     let imgElement = document.querySelector(".main_img_event");
      imgElement.src = "https://eventafisha.com/storage/" + imgPath;
  }
  function setCategory(obj) {
     let category = obj.category.title;
-    let categoryElement = document.querySelector(".item_tag");
+    let categoryElement = document.querySelector(".block_category");
     categoryElement.innerHTML = category;
+}
+function setTopTags(obj) {
+    let tags = "";
+    let tagsElement = document.querySelector(".container_top_tags");
+	for(let i=0; i < obj.tags.length; i++) {
+		// console.log("tags", arr[i].title);
+		tags += '<div class="tag_top">' + obj.tags[i].title + '</div>';
+    };
+    tagsElement.innerHTML = tags;
+}
+
+function setBottomTags(obj) {
+    let tags = "";
+    let tagsElement = document.querySelector(".container_bottom_tags");
+	for(let i=0; i < obj.tags.length; i++) {
+		// console.log("tags", arr[i].title);
+		tags += '<div class="tag_bottom">' + obj.tags[i].title + '</div>';
+    };
+    tagsElement.innerHTML = tags;
 }
