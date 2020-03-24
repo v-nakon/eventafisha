@@ -129,7 +129,7 @@ header
 	margin: 20px auto 0 auto
 	display: flex
 	flex-wrap: wrap
-	justify-content: space-between
+	justify-content: space-evenly
 .event_card
 	display: flex
 	width: 32%
@@ -202,6 +202,8 @@ header
 	margin-right: 2px
 	cursor: pointer
 	background-color: white
+.bg_chosen_day
+	background-color: #B2BABB
 .name_day
 	// padding: 10px
 .count_day
@@ -303,17 +305,20 @@ footer
 	color: #ffffff
 	font-size: 28px
 	font-weight: 500
+
+//start drop-down category
 .arrow_down
-	border: solid $main-color
+	border: solid black
 	border-width: 0 3px 3px 0
 	display: inline-block
-	padding: 3px
+	padding: 4px
 	transform: rotate(45deg)
 	-webkit-transform: rotate(45deg)
 	margin-left: 5px
+.arrow_down:hover
+    border-color: $main-color
 .border_none 
 	border: none
-//drop-down
 .dropdown_window
 	position: relative
 	display: inline-block
@@ -325,21 +330,36 @@ footer
 	top: 30px
 	background-color: #fff
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
-	z-index: 1
+	z-index: 99999
+.dropdown_content_mob
+    right: -60px
 .container_category
 	display: flex
 	flex-direction: row
 	flex-wrap: wrap
-	width: 300px
-.dropdown_content div
-	color: black
-	padding: 12px 16px
-	// display: block
-.dropdown_content div:hover
+	width: 400px
+.container_category_mob
+    display: flex
+    width: 280px
+    flex-direction: row
+    flex-wrap: wrap
+.item_category
+    font-size: 15px
+    color: black
+    padding: 10px 14px
+    min-width: 170px
+.container_category_mob .item_category
+    font-size: 12px
+    padding: 8px 12px
+    min-width: 110px
+.item_category:hover
 	color: $main-color
 .show
 	display: block
-
+.color_active_cat 
+	color: $main-color !important
+	border-color: $main-color
+//end drop-down category
 @media (max-width: 1050px)
 	.container_main, .container_header
 		width: 95%
