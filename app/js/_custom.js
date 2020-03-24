@@ -161,28 +161,31 @@ function addEventToElement(element, catId) {
 		paginationAjax('#pagination', nameEventSearch, cityEventSearch, fromDateSearch, toDateSearch, categorySearch);
 	});
 };
-var elCatAll = document.querySelector("#search_cat_all");
-var elCatMain1 = document.querySelector("#search_cat_main1");
-var elCatMain2 = document.querySelector("#search_cat_main2");
-
-elCatAll.addEventListener("click", function(){
-	delActiveColor("color_active_cat");
-	elCatAll.classList.add("color_active_cat");
-	categorySearch = '';
-	paginationAjax('#pagination', nameEventSearch, cityEventSearch, fromDateSearch, toDateSearch, categorySearch);
-});
-elCatMain1.addEventListener("click", function(){
-	delActiveColor("color_active_cat");
-	elCatMain1.classList.add("color_active_cat");
-	categorySearch = 4;
-	paginationAjax('#pagination', nameEventSearch, cityEventSearch, fromDateSearch, toDateSearch, categorySearch);
-});
-elCatMain2.addEventListener("click", function(){
-	delActiveColor("color_active_cat");
-	elCatMain2.classList.add("color_active_cat");
-	categorySearch = 5;
-	paginationAjax('#pagination', nameEventSearch, cityEventSearch, fromDateSearch, toDateSearch, categorySearch);
-});
+var arrElCat = [
+	{
+		el: document.querySelector("#search_cat_all"),
+		id: ""
+	}, 
+	{
+		el: document.querySelector("#search_cat_main1"),
+		id: 4
+	}, 
+	{
+		el: document.querySelector("#search_cat_main2"),
+		id: 5
+	},
+];
+function addListenerToArrEl(arr) {
+	for(let i in arr) {
+		arr[i].el.addEventListener("click", function(){
+			delActiveColor("color_active_cat");
+			arr[i].el.classList.add("color_active_cat");
+			categorySearch = arr[i].id;
+			paginationAjax('#pagination', nameEventSearch, cityEventSearch, fromDateSearch, toDateSearch, categorySearch);
+		});
+	}
+}
+addListenerToArrEl(arrElCat);
 // END categories for search
 function delActiveColor(className) {
 	let arrActiveColor = document.querySelectorAll("." + className);
