@@ -162,6 +162,7 @@ var allDateEl = document.querySelector(".all_days");
 allDateEl.addEventListener("click", function() {
   delActiveColor("bg_chosen_day");
   allDateEl.classList.add("bg_chosen_day");
+  paginationAjax("#pagination", "", "", "", "", categorySearch);
 });
 // END BLOCK SEARCH DATE
 // START categories for search
@@ -219,7 +220,11 @@ var arrElCat = [
   },
   {
     el: document.querySelector("#search_cat_main2"),
-    id: 5
+    id: 20
+  },
+  {
+    el: document.querySelector("#search_cat_main3"),
+    id: 21
   }
 ];
 function addListenerToArrEl(arr) {
@@ -368,6 +373,7 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category) {
     ajax: {
       beforeSend: function() {
         // container.prev().html('Загрузка данных');
+        removeEventList();
         spinner.classList.remove("hide_spinner");
       }
     },
