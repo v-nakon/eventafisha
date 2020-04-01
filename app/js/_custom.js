@@ -1,6 +1,7 @@
 createBlockDate();
 getCategories();
 getCities("city");
+getSubjects();
 
 var spinner = document.querySelector(".block_spinner");
 
@@ -15,7 +16,9 @@ closeModalNotfound.addEventListener("click", function() {
 });
 
 let btnSearch = document.querySelector(".btn_search");
-btnSearch.addEventListener("click", () => searchEvent("event_name", "city"));
+btnSearch.addEventListener("click", () =>
+  searchEvent("event_name", "city", "subject_search")
+);
 
 function viewEvent(id) {
   console.log("ID", id);
@@ -75,6 +78,22 @@ function getCities(elementSelect) {
     .then(function(response) {
       for (let item in response.data) {
         addOptionSelect(response.data[item], elementSelect);
+      }
+    })
+    .catch(function(error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function() {
+      // always executed
+    });
+}
+function getSubjects() {
+  axios
+    .get("https://eventafisha.com/api/v1/subjects")
+    .then(function(response) {
+      for (let item in response.data) {
+        addOptionSelect(response.data[item], "subject_search");
       }
     })
     .catch(function(error) {
@@ -153,7 +172,8 @@ function addEventElementDate(element, searchDate) {
       cityEventSearch,
       fromDateSearch,
       toDateSearch,
-      categorySearch
+      categorySearch,
+      subjectSearch
     );
     // document.querySelector(".arrow_down").classList.add("color_active_cat");
   });
@@ -162,7 +182,7 @@ var allDateEl = document.querySelector(".all_days");
 allDateEl.addEventListener("click", function() {
   delActiveColor("bg_chosen_day");
   allDateEl.classList.add("bg_chosen_day");
-  paginationAjax("#pagination", "", "", "", "", categorySearch);
+  paginationAjax("#pagination", "", "", "", "", categorySearch, subjectSearch);
 });
 // END BLOCK SEARCH DATE
 // START categories for search
@@ -205,7 +225,8 @@ function addEventToElement(element, catId) {
       cityEventSearch,
       fromDateSearch,
       toDateSearch,
-      categorySearch
+      categorySearch,
+      subjectSearch
     );
   });
 }
@@ -239,7 +260,8 @@ function addListenerToArrEl(arr) {
         cityEventSearch,
         fromDateSearch,
         toDateSearch,
-        categorySearch
+        categorySearch,
+        subjectSearch
       );
     });
   }
@@ -301,11 +323,13 @@ var toDateSearch = "";
 var nameEventSearch = "";
 var cityEventSearch = "";
 var categorySearch = "";
+var subjectSearch = "";
 
 // для поиска по названию/городу
-function searchEvent(titleEl, cityEl, dateStart, dateEnd) {
+function searchEvent(titleEl, cityEl, subjectEl) {
   nameEventSearch = document.getElementById(titleEl).value;
   cityEventSearch = document.getElementById(cityEl).value;
+  subjectSearch = document.getElementById(subjectEl).value;
   // searchRequest(nameEvent, cityEvent);
   paginationAjax(
     "#pagination",
@@ -313,7 +337,8 @@ function searchEvent(titleEl, cityEl, dateStart, dateEnd) {
     cityEventSearch,
     fromDateSearch,
     toDateSearch,
-    categorySearch
+    categorySearch,
+    subjectSearch
   );
 }
 function removeEventList() {
@@ -324,10 +349,10 @@ function removeEventList() {
 }
 
 $(function() {
-  paginationAjax("#pagination", "", "", "", "", "");
+  paginationAjax("#pagination", "", "", "", "", "", "");
 });
 
-function checkSearchParam(title, city, dateStart, dateEnd, category) {
+function checkSearchParam(title, city, dateStart, dateEnd, category, subject) {
   let link = "https://eventafisha.com/api/v1/events?paginate=";
   if (title !== "") {
     link += "&title=" + title;
@@ -344,11 +369,29 @@ function checkSearchParam(title, city, dateStart, dateEnd, category) {
   if (category !== "") {
     link += "&category_id=" + category;
   }
+  if (subject !== "") {
+    link += "&subject_id=" + subject;
+  }
   return link;
 }
 
-function paginationAjax(name, title, city, dateStart, dateEnd, category) {
-  let url = checkSearchParam(title, city, dateStart, dateEnd, category);
+function paginationAjax(
+  name,
+  title,
+  city,
+  dateStart,
+  dateEnd,
+  category,
+  subject
+) {
+  let url = checkSearchParam(
+    title,
+    city,
+    dateStart,
+    dateEnd,
+    category,
+    subject
+  );
   var container = $(name);
   container.pagination({
     dataSource: url,

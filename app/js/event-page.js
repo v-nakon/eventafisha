@@ -5,6 +5,7 @@ let idEvent = urlParams.get("id");
 axios
   .get("https://eventafisha.com/api/v1/events/" + idEvent)
   .then(function(response) {
+    checkMetaData(response.data);
     document.title = response.data.title;
     setTitle(response.data);
     setDate(response.data);
@@ -26,7 +27,25 @@ axios
   .then(function() {
     // always executed
   });
-
+function checkMetaData(response) {
+  if (response.seo.meta_title !== null) {
+    setMetaData("title", response.seo.meta_title);
+  } else {
+    setMetaData("title", response.title);
+  }
+  if (response.seo.meta_desc !== null) {
+    setMetaData("description", response.seo.meta_desc);
+  }
+  if (response.seo.meta_keywords !== null) {
+    setMetaData("keywords", response.seo.meta_keywords);
+  }
+}
+function setMetaData(name, data) {
+  let meta = document.createElement("meta");
+  meta.name = name;
+  meta.content = data;
+  document.querySelector("head").appendChild(meta);
+}
 function setTitle(obj) {
   let title = obj.title;
   let titleElement = document.querySelector(".event_title");
