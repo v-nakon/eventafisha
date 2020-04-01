@@ -6,7 +6,7 @@ axios
   .get("https://eventafisha.com/api/v1/events/" + idEvent)
   .then(function(response) {
     document.title = response.data.title;
-    // setTimeout(() => (document.location.href = response.data.buy_link), 4000);
+    setTimeout(() => (document.location.href = response.data.buy_link), 4000);
   })
   .catch(function(error) {
     // handle error
