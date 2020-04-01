@@ -82,12 +82,15 @@ function setPrice(obj) {
 function setBuyLink(obj) {
   let buyLink = obj.buy_link;
   let id = obj.id;
-  let redirectLink = "https://eventafisha.com/events/" + id + "/redirect-page";
+  let redirectLink = "/redirect-page.html?id=" + id;
   if (buyLink === null) {
     document.querySelector(".block_btn_buy").classList.add("hide_element");
   } else {
     let buyBtn = document.querySelector(".btn_buy_ticket");
-    buyBtn.addEventListener("click", () => window.open(redirectLink));
+    buyBtn.addEventListener(
+      "click",
+      () => (document.location.href = redirectLink)
+    );
   }
 }
 function setDescription(obj) {

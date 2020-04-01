@@ -21,8 +21,8 @@ btnSearch.addEventListener("click", () =>
 );
 
 function viewEvent(id) {
-  console.log("ID", id);
-  console.log(window.location.href);
+  // console.log("ID", id);
+  // console.log(window.location.href);
   let urlEvent = window.location.href + "event-page.html?id=" + id;
   window.open(urlEvent);
 }
