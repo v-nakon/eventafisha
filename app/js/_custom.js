@@ -228,3 +228,13 @@ export function paginationAjax(
     }
   });
 }
+
+document.addEventListener("keydown", pushEnterBtn);
+function pushEnterBtn(event) {
+  if (event.which == 13 || event.keyCode == 13) {
+    let getElTag = document.activeElement.tagName;
+    if (getElTag === "INPUT" || getElTag === "SELECT") {
+      searchEvent("event_name", "city", "subject_search");
+    }
+  }
+}
