@@ -6,7 +6,7 @@ import { categorySearch } from "../_custom.js";
 import { subjectSearch } from "../_custom.js";
 import { setCategorySearch } from "../_custom.js";
 import { paginationAjax } from "../_custom.js";
-
+import { delActiveColor } from "./help_create_elements.js";
 // categories for search
 export function addCatToSearch(item, elementTo) {
   // console.log(item);
@@ -20,7 +20,7 @@ export function addCatToSearch(item, elementTo) {
 }
 function addEventToElement(element, catId) {
   element.addEventListener("click", function() {
-    delActiveColor();
+    delActiveColor("color_active_cat");
     // console.log("CAT - ", catId);
     element.classList.add("color_active_cat");
     setCategorySearch(catId);
@@ -37,14 +37,6 @@ function addEventToElement(element, catId) {
     );
   });
 }
-function delActiveColor() {
-  let arrActiveColor = document.querySelectorAll(".color_active_cat");
-  // console.log("arr", arrActiveColor);
-  arrActiveColor.forEach(function(el) {
-    el.classList.remove("color_active_cat");
-  });
-}
-
 // arr for static category btn
 var arrElCat = [
   {
@@ -67,7 +59,7 @@ var arrElCat = [
 function addListenerToArrEl(arr) {
   for (let i in arr) {
     arr[i].el.addEventListener("click", function() {
-      delActiveColor();
+      delActiveColor("color_active_cat");
       arr[i].el.classList.add("color_active_cat");
       // categorySearch = arr[i].id;
       setCategorySearch(arr[i].id);

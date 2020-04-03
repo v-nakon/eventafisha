@@ -4,6 +4,8 @@ import { getCategories } from "./helpers/requests.js";
 import { getCities } from "./helpers/requests.js";
 import { getSubjects } from "./helpers/requests.js";
 import { addCatToSearch } from "./helpers/category_search_block.js";
+import { delActiveColor } from "./helpers/help_create_elements.js";
+import { createBlockDate } from "./helpers/days_search_block.js";
 
 createBlockDate();
 getCategoriesData();
@@ -58,82 +60,9 @@ function getCategoriesData() {
       console.log(error);
     });
 }
-// START BLOCK SEARCH DATE
-function createBlockDate() {
-  for (let i = 0; i < 6; i++) {
-    var date = new Date();
-    let unixtimeDate = date.setDate(date.getDate() + i);
-    moment.locale("ru");
-    console.log(moment(unixtimeDate).format("DD"));
-    console.log(moment(unixtimeDate).format("dd"));
-    console.log(moment(unixtimeDate).format("DD.MM.YYYY"));
-    createSearchDays(
-      moment(unixtimeDate).format("dd"),
-      moment(unixtimeDate).format("DD"),
-      moment(unixtimeDate).format("DD.MM.YYYY")
-    );
-  }
+export function clearDP() {
+  dp.clear();
 }
-function createSearchDays(dayName, dayCount, dateForSearch) {
-  let dayEl;
-  if (dayName === "сб" || dayName === "вс") {
-    dayEl =
-      `
-		<div class="name_day red_text">` +
-      dayName +
-      `</div>
-		<div class="count_day">` +
-      dayCount +
-      `</div>
-	`;
-  } else {
-    dayEl =
-      `
-		<div class="name_day">` +
-      dayName +
-      `</div>
-		<div class="count_day">` +
-      dayCount +
-      `</div>
-	`;
-  }
-  // console.log(test);
-
-  let listDays = document.querySelector(".block_search_day");
-  let eventCardElement = document.createElement("div");
-  eventCardElement.className = "item_search_date";
-  eventCardElement.innerHTML = dayEl;
-  listDays.append(eventCardElement);
-  addEventElementDate(eventCardElement, dateForSearch);
-}
-function addEventElementDate(element, searchDate) {
-  element.addEventListener("click", function() {
-    dp.clear();
-    delActiveColor("bg_chosen_day");
-    console.log("Data - ", searchDate);
-    element.classList.add("bg_chosen_day");
-    fromDateSearch = searchDate;
-    paginationAjax(
-      "#pagination",
-      nameEventSearch,
-      cityEventSearch,
-      fromDateSearch,
-      toDateSearch,
-      categorySearch,
-      subjectSearch
-    );
-    // document.querySelector(".arrow_down").classList.add("color_active_cat");
-  });
-}
-var allDateEl = document.querySelector(".all_days");
-allDateEl.addEventListener("click", function() {
-  delActiveColor("bg_chosen_day");
-  allDateEl.classList.add("bg_chosen_day");
-  paginationAjax("#pagination", "", "", "", "", categorySearch, subjectSearch);
-});
-// END BLOCK SEARCH DATE
-
-// search datepicker
 let $btn = $(".datepicker_btn"),
   $input = $("#dp"),
   dp = $input
@@ -142,7 +71,7 @@ let $btn = $(".datepicker_btn"),
       range: true,
 
       onSelect: function(dateText, inst) {
-        console.log(dateText);
+        // console.log(dateText);
         splitSearchDate(dateText);
       },
       minDate: new Date()
@@ -174,6 +103,9 @@ export var categorySearch = "";
 export var subjectSearch = "";
 export function setCategorySearch(value) {
   categorySearch = value;
+}
+export function setFromDateSearch(value) {
+  fromDateSearch = value;
 }
 
 // для поиска по названию/городу
@@ -249,7 +181,7 @@ export function paginationAjax(
     locator: "data",
     totalNumberLocator: function(dataSource) {
       // you can return totalNumber by analyzing response content
-      console.log("test", dataSource.total);
+      // console.log("test", dataSource.total);
       return dataSource.total;
     },
     pageSize: 24,
@@ -275,7 +207,7 @@ export function paginationAjax(
       // window.console && console.log(22, response, pagination.pageNumber);
       // console.log(pagination.pageNumber);
       spinner.classList.add("hide_spinner");
-      console.log("response", response);
+      // console.log("response", response);
       if (response.length === 0) {
         modalNotFound.style.display = "block";
       } else {

@@ -79,3 +79,11 @@ function checkCity(objCity) {
     return objCity.title + ", ";
   }
 }
+export function delActiveColor(className) {
+  let arrActiveColor = document.querySelectorAll("." + className);
+  // console.log("arr", arrActiveColor)
+  arrActiveColor.forEach(function(el) {
+    el.classList.remove(className);
+    // console.log("delete class")
+  });
+}
