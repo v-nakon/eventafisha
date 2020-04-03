@@ -1,87 +1,81 @@
 export function addOptionSelect(item, elementSelect) {
-    let selectCategory = document.getElementById(elementSelect);
-    let option = document.createElement("option");
-    option.value = item.id;
-    option.innerHTML = item.title;
-    selectCategory.add(option);
-};
+  let selectCategory = document.getElementById(elementSelect);
+  let option = document.createElement("option");
+  option.value = item.id;
+  option.innerHTML = item.title;
+  selectCategory.add(option);
+}
 
 // for create list events on main page
 export function createEventCard(objItem) {
-    let listEventsElement = document.querySelector(".container_list_events");
-    let costEvent = checkCostEvent(objItem.cost);
-    let eventCardElements =
-        `<div class="event_card_date_info">
-      <div class="event_card_date">
-          <img class="event_card_img" src="https://eventafisha.com/storage/` +
-        objItem.images +
-        `" alt="title">
-          <div class="event_time">` +
-        new Date(objItem.start_date).toLocaleDateString() +
-        `</div>
-      </div>
-      <div class="event_card_info">
-          <div class="event_title_tag">
-              <div class="title_img_mob">
-                  <img class="event_card_img_mob" src="https://eventafisha.com/storage/` +
-        objItem.images +
-        `" alt="title">
-                  <div class="event_title">` +
-        objItem.title +
-        `</div>
-              </div>
-              <div class="event_tag">` +
-        objItem.category.title +
-        `</div>
-          </div>
-          <div class="event_time_mob">` +
-        new Date(objItem.start_date).toLocaleDateString() +
-        `</div>
-          <div class="event_location_price">
-              <div class="event_location">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="location_icon" viewBox="0 0 24 24"><path fill="#666" d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/></svg>
-                  <div class="location_name">` +
-        objItem.address +
-        `</div>
-              </div>`
-        + costEvent +
-        `</div>
-      <div class="tags_info">` +
-        createTagsElement(objItem.tags) +
-        `</div>
-      </div>
-      </div>
-      <svg xmlns="http://www.w3.org/2000/svg" class="info_icon" viewBox="0 0 24 24"><path class="info_icon_color" d="M14 18l10-7.088-10-6.912v3.042s-11.618 2.583-14 12.958c5.072-5.431 14-5.218 14-5.218v3.218z"/></svg>`;
-    // console.log(test);
+  let eventCardElements =
+    ` <div class="event_card_content">
+  <a href="event-page.html?id=` +
+    objItem.id +
+    `" target="_blank">  
+	<div class="block_event_img">
+		<img src="https://eventafisha.com/storage/` +
+    objItem.images +
+    `" alt="` +
+    sliceText(objItem.title, 20) +
+    `" class="event_card_img">
+	</div>
+  </a>
+	<div class="event_card_title">` +
+    sliceText(objItem.title, 60) +
+    `</div>
+	<div class="event_card_desc">` +
+    sliceText(objItem.desc, 120) +
+    `</div>
+	<div class="card_icon_title">
+		<svg xmlns="http://www.w3.org/2000/svg" class="event_card_icon" viewBox="0 0 24 24"><path d="M17 3v-2c0-.552.447-1 1-1s1 .448 1 1v2c0 .552-.447 1-1 1s-1-.448-1-1zm-12 1c.553 0 1-.448 1-1v-2c0-.552-.447-1-1-1-.553 0-1 .448-1 1v2c0 .552.447 1 1 1zm13 13v-3h-1v4h3v-1h-2zm-5 .5c0 2.481 2.019 4.5 4.5 4.5s4.5-2.019 4.5-4.5-2.019-4.5-4.5-4.5-4.5 2.019-4.5 4.5zm11 0c0 3.59-2.91 6.5-6.5 6.5s-6.5-2.91-6.5-6.5 2.91-6.5 6.5-6.5 6.5 2.91 6.5 6.5zm-14.237 3.5h-7.763v-13h19v1.763c.727.33 1.399.757 2 1.268v-9.031h-3v1c0 1.316-1.278 2.339-2.658 1.894-.831-.268-1.342-1.111-1.342-1.984v-.91h-9v1c0 1.316-1.278 2.339-2.658 1.894-.831-.268-1.342-1.111-1.342-1.984v-.91h-3v21h11.031c-.511-.601-.938-1.273-1.268-2z"/></svg>
+		<div class="card_title">` +
+    new Date(objItem.start_date).toLocaleDateString() +
+    `</div>
+	</div>
+	<div class="card_icon_title">
+		<svg xmlns="http://www.w3.org/2000/svg" class="event_card_icon" viewBox="0 0 24 24"><path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/></svg>
+    <div class="card_title">` +
+    checkCity(objItem.city) +
+    objItem.address +
+    `</div>
+	</div>
+	<div class="event_card_cat">` +
+    objItem.category.title +
+    `</div>
+	<input class="btn_buy_ticket" type="submit" value="Купить билет")">
+  </div>`;
+  // console.log(test);
 
-    let eventCardElement = document.createElement("a");
-    eventCardElement.setAttribute("target", "_blank");
-    eventCardElement.href = "/event-page.html?id=" + objItem.id;
-    eventCardElement.className = "event_card";
-    eventCardElement.innerHTML = eventCardElements;
-    listEventsElement.append(eventCardElement);
-};
-function checkCostEvent(cost) {
-    let tempEl = `<div class="event_price">
-    <svg xmlns="http://www.w3.org/2000/svg" class="price_icon" viewBox="0 0 24 24"><path fill="#666" d="M22 4h-20c-1.104 0-2 .896-2 2v12c0 1.104.896 2 2 2h20c1.104 0 2-.896 2-2v-12c0-1.104-.896-2-2-2zm0 13.5c0 .276-.224.5-.5.5h-19c-.276 0-.5-.224-.5-.5v-6.5h20v6.5zm0-9.5h-20v-1.5c0-.276.224-.5.5-.5h19c.276 0 .5.224.5.5v1.5zm-9 6h-9v-1h9v1zm-3 2h-6v-1h6v1zm10-2h-3v-1h3v1z"/></svg>
-    <div class="price">` +
-        cost +
-        `
-    </div>
-    </div>`;
-    if (cost == 0) {
-        return "";
-    } else {
-        return tempEl;
-    }
-};
-function createTagsElement(arr) {
-    let tags = "";
-    for (let i = 0; i < arr.length; i++) {
-        // console.log("tags", arr[i].title);
-        tags += '<div class="event_tag green_tag_info">' + arr[i].title + "</div>";
-    }
-    // console.log(tags);
-    return tags;
-};
+  let listEventsElement = document.querySelector(".container_events");
+  let eventCardElement = document.createElement("li");
+  eventCardElement.className = "event_card";
+  eventCardElement.innerHTML = eventCardElements;
+  listEventsElement.append(eventCardElement);
+  addEventToEl(eventCardElement, objItem.id);
+}
 // END for create list events on main page
+function sliceText(text, count) {
+  let sliced = text.replace(/<\/?[^>]+>/g, "");
+  sliced = sliced.slice(0, count);
+  if (sliced.length < text.length) {
+    sliced += "...";
+  }
+  return sliced;
+}
+
+function addEventToEl(element, id) {
+  let btnEl = element.querySelector(".btn_buy_ticket");
+  btnEl.addEventListener("click", function() {
+    let urlEvent = window.location.href + "event-page.html?id=" + id;
+    window.open(urlEvent);
+  });
+}
+
+function checkCity(objCity) {
+  if (objCity === null) {
+    return "";
+  } else {
+    return objCity.title + ", ";
+  }
+}
