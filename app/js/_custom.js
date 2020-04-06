@@ -17,7 +17,7 @@ var spinner = document.querySelector(".block_spinner");
 var modalNotFound = document.querySelector(".container_modal_notfound");
 var closeModalNotfound = document.querySelector(".close_modal_notfound");
 
-closeModalNotfound.addEventListener("click", function() {
+closeModalNotfound.addEventListener("click", function () {
   modalNotFound.style.display = "none";
   document.location.href = "/";
 });
@@ -29,34 +29,34 @@ btnSearch.addEventListener("click", () =>
 
 function getCitiesData() {
   getCities()
-    .then(response => {
+    .then((response) => {
       for (let item in response.data) {
         addOptionSelect(response.data[item], "city");
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 }
 function getSubjectsData() {
   getSubjects()
-    .then(response => {
+    .then((response) => {
       for (let item in response.data) {
         addOptionSelect(response.data[item], "subject_search");
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 }
 function getCategoriesData() {
   getCategories()
-    .then(response => {
+    .then((response) => {
       for (let item in response.data) {
         addCatToSearch(response.data[item], ".container_category");
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 }
@@ -70,15 +70,15 @@ let $btn = $(".datepicker_btn"),
       showEvent: "none",
       range: true,
 
-      onSelect: function(dateText, inst) {
+      onSelect: function (dateText, inst) {
         // console.log(dateText);
         splitSearchDate(dateText);
       },
-      minDate: new Date()
+      minDate: new Date(),
     })
     .data("datepicker");
 
-$btn.on("click", function() {
+$btn.on("click", function () {
   dp.show();
   dp.clear();
   $input.focus();
@@ -131,7 +131,7 @@ function removeEventList() {
   }
 }
 
-$(function() {
+$(function () {
   paginationAjax("#pagination", "", "", "", "", "", "");
 });
 
@@ -179,7 +179,7 @@ export function paginationAjax(
   container.pagination({
     dataSource: url,
     locator: "data",
-    totalNumberLocator: function(dataSource) {
+    totalNumberLocator: function (dataSource) {
       // you can return totalNumber by analyzing response content
       // console.log("test", dataSource.total);
       return dataSource.total;
@@ -194,16 +194,16 @@ export function paginationAjax(
     className: "paginationjs-theme paginationjs-small",
     alias: {
       pageNumber: "page",
-      pageSize: "limit"
+      pageSize: "limit",
     },
     ajax: {
-      beforeSend: function() {
+      beforeSend: function () {
         // container.prev().html('Загрузка данных');
         removeEventList();
         spinner.classList.remove("hide_spinner");
-      }
+      },
     },
-    callback: function(response, pagination) {
+    callback: function (response, pagination) {
       // window.console && console.log(22, response, pagination.pageNumber);
       // console.log(pagination.pageNumber);
       spinner.classList.add("hide_spinner");
@@ -212,7 +212,7 @@ export function paginationAjax(
         modalNotFound.style.display = "block";
       } else {
         removeEventList();
-        $.each(response, function(index, item) {
+        $.each(response, function (index, item) {
           createEventCard(item);
         });
         window.scrollTo(0, 0);
@@ -225,7 +225,7 @@ export function paginationAjax(
       // 	searchNameMob.value = "";
       // 	searchLocationMob.value = "";
       // }
-    }
+    },
   });
 }
 

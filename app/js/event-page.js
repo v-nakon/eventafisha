@@ -8,7 +8,7 @@ let idEvent = urlParams.get("id");
 getEventData(idEvent);
 function getEventData(idEvent) {
   getEvent(idEvent)
-    .then(response => {
+    .then((response) => {
       checkMetaData(response.data);
       document.title = response.data.title;
       setTitle(response.data);
@@ -24,17 +24,21 @@ function getEventData(idEvent) {
       setBottomTags(response.data);
       setPromo(response.data);
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
+      document.querySelector(".container").classList.add("hide_element");
+      document
+        .querySelector(".container_notfound")
+        .classList.remove("hide_element");
     });
 }
 function setOrderNumber(idEvent) {
   orderNumber(idEvent)
-    .then(response => {
+    .then((response) => {
       // console.log("Num order", response)
       goRedirectPage(idEvent);
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 }
@@ -91,8 +95,12 @@ function setDate(obj) {
   let startDate = new Date(obj.start_date);
   let endDate = new Date(obj.end_date);
   let dateElement = document.querySelector("#event_date");
-  dateElement.innerHTML =
-    startDate.toLocaleDateString() + " - " + endDate.toLocaleDateString();
+  if (startDate.toLocaleDateString() === endDate.toLocaleDateString()) {
+    dateElement.innerHTML = startDate.toLocaleDateString();
+  } else {
+    dateElement.innerHTML =
+      startDate.toLocaleDateString() + " - " + endDate.toLocaleDateString();
+  }
 }
 function setCity(obj) {
   let city = obj.city.title;
@@ -121,7 +129,7 @@ function setBuyLink(obj) {
     document.querySelector(".block_btn_buy").classList.add("hide_element");
   } else {
     let buyBtn = document.querySelector(".btn_buy_ticket");
-    buyBtn.addEventListener("click", function() {
+    buyBtn.addEventListener("click", function () {
       setOrderNumber(idEvent);
     });
   }
