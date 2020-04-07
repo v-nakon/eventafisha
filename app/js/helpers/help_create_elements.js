@@ -67,7 +67,7 @@ function sliceText(text, count) {
 function addEventToEl(element, id) {
   let btnEl = element.querySelector(".btn_buy_ticket");
   btnEl.addEventListener("click", function () {
-    let urlEvent = window.location.href + "event-page.html?id=" + id;
+    let urlEvent = window.location.origin + "/event-page.html?id=" + id;
     window.open(urlEvent);
   });
 }

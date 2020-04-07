@@ -7,6 +7,7 @@ import { addOptionSelect } from "./help_create_elements.js";
 
 var modal = document.querySelector(".container_modal");
 var createEventBtn = document.querySelector(".btn_add_event");
+var footerCreateEvent = document.querySelector(".footer_create_event");
 var closeModal = document.querySelector(".close_modal");
 var modalModeration = document.querySelector(".container_modal_moderation");
 var modalModerationError = document.querySelector(".container_modal_error");
@@ -39,73 +40,77 @@ getTagsData();
 getCitiesData();
 getSubjectsData();
 
-createEventBtn.addEventListener("click", function() {
+createEventBtn.addEventListener("click", function () {
   modal.style.display = "block";
 });
-closeModal.addEventListener("click", function() {
+footerCreateEvent.addEventListener("click", function () {
+  modal.style.display = "block";
+});
+
+closeModal.addEventListener("click", function () {
   modal.style.display = "none";
 });
-closeModalModeration.addEventListener("click", function() {
+closeModalModeration.addEventListener("click", function () {
   modalModeration.style.display = "none";
   document.location.href = "/";
 });
-closeModalError.addEventListener("click", function() {
+closeModalError.addEventListener("click", function () {
   modalModerationError.style.display = "none";
   document.location.href = "/";
 });
-submitCreateEvent.addEventListener("click", function() {
+submitCreateEvent.addEventListener("click", function () {
   getModalInputs();
 });
-window.addEventListener("click", function(event) {
+window.addEventListener("click", function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
 });
-document.querySelector("#modal_img").addEventListener("change", event => {
+document.querySelector("#modal_img").addEventListener("change", (event) => {
   getBase64();
 });
 
 function getCategoriesData() {
   getCategories()
-    .then(response => {
+    .then((response) => {
       for (let item in response.data) {
         addOptionSelect(response.data[item], "modal_category");
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 }
 function getTagsData() {
   getTags()
-    .then(response => {
+    .then((response) => {
       for (let item in response.data) {
         addOptionSelect(response.data[item], "modal_tags");
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 }
 function getCitiesData() {
   getCities()
-    .then(response => {
+    .then((response) => {
       for (let item in response.data) {
         addOptionSelect(response.data[item], "modal_city");
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 }
 function getSubjectsData() {
   getSubjects()
-    .then(response => {
+    .then((response) => {
       for (let item in response.data) {
         addOptionSelect(response.data[item], "modal_subject");
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 }
@@ -129,14 +134,14 @@ function createEvent() {
     image: imgBase64, //file
     organizer_fio: clientName,
     organizer_phone: clientTel,
-    organizer_email: clientEmail
+    organizer_email: clientEmail,
   };
   createUserEvent(meta)
-    .then(response => {
+    .then((response) => {
       modal.style.display = "none";
       modalModeration.style.display = "block";
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
       modalModerationError.style.display = "block";
     });
@@ -145,10 +150,10 @@ function getBase64() {
   let file = document.querySelector("#modal_img").files[0];
   var reader = new FileReader();
   reader.readAsDataURL(file);
-  reader.onload = function() {
+  reader.onload = function () {
     imgBase64 = reader.result;
   };
-  reader.onerror = function(error) {
+  reader.onerror = function (error) {
     console.log("Error: ", error);
   };
 }
@@ -294,30 +299,30 @@ function inputsValidation() {
   }
   createEvent();
 }
-$(function() {
+$(function () {
   $(".datepicker_event_start").datepicker({
-    onSelect: function(dateText, inst) {
+    onSelect: function (dateText, inst) {
       startDateEvent = dateText;
     },
     minDate: new Date(),
-    autoClose: true
+    autoClose: true,
   });
 });
 
-$(function() {
+$(function () {
   $(".datepicker_event_end").datepicker({
-    onSelect: function(dateText, inst) {
+    onSelect: function (dateText, inst) {
       endDateEvent = dateText;
     },
     minDate: new Date(),
-    autoClose: true
+    autoClose: true,
   });
 });
 $(".datepicker_time").datepicker({
   timepicker: true,
   onlyTimepicker: true,
   classes: "only-timepicker",
-  onSelect: function(dateText, inst) {
+  onSelect: function (dateText, inst) {
     timeEvent = dateText;
-  }
+  },
 });

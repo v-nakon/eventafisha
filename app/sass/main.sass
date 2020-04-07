@@ -122,7 +122,7 @@ header
 	align-items: center
 .container_header a
 	text-decoration: none !important
-.container_main, .container_header
+.container_main, .container_header, .container_footer
 	width: 1024px
 	margin: auto
 .container_header
@@ -318,24 +318,46 @@ header
 footer
 	background-color: #75757A
 	width: 100%
-.footer_logo_report
+footer a
+	text-decoration: none !important
+	color: transparent !important
+.footer_logo_icons
 	@include flex-center
+.footer_icon
+	margin: 0 3px
+.footer_text_blocks
+	display: flex
 	justify-content: space-evenly
+	margin: 20px 0
+.footer_text_block, .footer_text_block hr
+	width: 220px
+	color: #fff
+	font-size: 12px
+	display: flex
+	flex-direction: column
+.footer_text_block a
+	color: #fff !important
+.footer_text_block .title
+	text-transform: uppercase
+	font-size: 13px
+.footer_text_block .text
+	font-size: 12px
+	padding: 4px 0
+	cursor: pointer
+.footer_text_block .text:hover
+	color: #D7DBDD
 .footer_text
-    color: #ffffff
-    font-size: 12px
-    margin: 0 auto
-    text-align: center
-.footer_copyright
-    padding-bottom: 10px
+	color: #D7DBDD
+	font-size: 12px
+.footer_text_copy
+	color: #D7DBDD
+	font-size: 16px
+	text-align: center
+	padding: 10px 0
 .footer_logo
 	color: #ffffff
 	font-size: 28px
 	font-weight: 500
-.btn_report_error
-	color: #ffffff
-	font-size: 13px
-	cursor: pointer
 // start modal report
 .report_label span 
     color: red
@@ -448,7 +470,7 @@ footer
 	text-align: center
 // end redirect-page style
 @media (max-width: 1050px)
-	.container_main, .container_header
+	.container_main, .container_header, .container_footer
 		width: 95%
 @media (max-width: 840px)
 	.block_search_cat
@@ -494,6 +516,12 @@ footer
 		flex-direction: column
 	.blocks_group .form_group
 		width: 100%
+	.footer_text_blocks
+		flex-direction: column
+		margin: 0
+		align-items: center
+	.footer_text_block
+		margin: 10px 0
 @media (max-width: 500px)
 	.block_search_cat
 		flex-direction: column

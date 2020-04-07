@@ -19,7 +19,7 @@ export function addCatToSearch(item, elementTo) {
   addEventToElement(newCat, item.id);
 }
 function addEventToElement(element, catId) {
-  element.addEventListener("click", function() {
+  element.addEventListener("click", function () {
     delActiveColor("color_active_cat");
     // console.log("CAT - ", catId);
     element.classList.add("color_active_cat");
@@ -41,24 +41,24 @@ function addEventToElement(element, catId) {
 var arrElCat = [
   {
     el: document.querySelector("#search_cat_all"),
-    id: ""
+    id: "",
   },
   {
     el: document.querySelector("#search_cat_main1"),
-    id: 24
+    id: 24,
   },
   {
     el: document.querySelector("#search_cat_main2"),
-    id: 1
+    id: 1,
   },
   {
     el: document.querySelector("#search_cat_main3"),
-    id: 2
-  }
+    id: 2,
+  },
 ];
-function addListenerToArrEl(arr) {
+export function addListenerToArrEl(arr) {
   for (let i in arr) {
-    arr[i].el.addEventListener("click", function() {
+    arr[i].el.addEventListener("click", function () {
       delActiveColor("color_active_cat");
       arr[i].el.classList.add("color_active_cat");
       // categorySearch = arr[i].id;
@@ -79,11 +79,11 @@ addListenerToArrEl(arrElCat);
 // end categories for search
 
 // Open the dropdown window CATEGORY
-document.querySelector(".dropbtn").addEventListener("click", function() {
+document.querySelector(".dropbtn").addEventListener("click", function () {
   document.querySelector(".dropdown_content").classList.toggle("show");
 });
 // Close the dropdown if the user clicks outside of it CATEGORY
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (!event.target.matches(".dropbtn")) {
     var dropdown = document.querySelector(".dropdown_content");
     if (dropdown.classList.contains("show")) {

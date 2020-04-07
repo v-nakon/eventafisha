@@ -131,9 +131,9 @@ function removeEventList() {
   }
 }
 
-$(function () {
-  paginationAjax("#pagination", "", "", "", "", "", "");
-});
+// $(function () {
+//   paginationAjax("#pagination", "", "", "", "", "", "");
+// });
 
 function checkSearchParam(title, city, dateStart, dateEnd, category, subject) {
   let link = "https://eventafisha.com/api/v1/events?paginate=";
@@ -237,4 +237,14 @@ function pushEnterBtn(event) {
       searchEvent("event_name", "city", "subject_search");
     }
   }
+}
+
+let urlStringParams = window.location.search;
+let urlParams = new URLSearchParams(urlStringParams);
+let categoryIdParam = urlParams.get("cat_id");
+if (categoryIdParam !== null) {
+  categorySearch = categoryIdParam;
+  searchEvent("event_name", "city", "subject_search");
+} else {
+  paginationAjax("#pagination", "", "", "", "", "", "");
 }
