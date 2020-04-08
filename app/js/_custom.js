@@ -109,9 +109,13 @@ export function setFromDateSearch(value) {
 }
 
 // для поиска по названию/городу
-function searchEvent(titleEl, cityEl, subjectEl) {
+function searchEvent(titleEl, cityEl, subjectEl, searchCityID) {
   nameEventSearch = document.getElementById(titleEl).value;
-  cityEventSearch = document.getElementById(cityEl).value;
+  if (searchCityID === undefined) {
+    cityEventSearch = document.getElementById(cityEl).value;
+  } else {
+    cityEventSearch = searchCityID;
+  }
   subjectSearch = document.getElementById(subjectEl).value;
   // searchRequest(nameEvent, cityEvent);
   paginationAjax(
@@ -242,9 +246,13 @@ function pushEnterBtn(event) {
 let urlStringParams = window.location.search;
 let urlParams = new URLSearchParams(urlStringParams);
 let categoryIdParam = urlParams.get("cat_id");
+let cityIdParam = urlParams.get("city_id");
+console.log(cityIdParam);
 if (categoryIdParam !== null) {
   categorySearch = categoryIdParam;
   searchEvent("event_name", "city", "subject_search");
+} else if (cityIdParam !== null) {
+  searchEvent("event_name", "city", "subject_search", cityIdParam);
 } else {
   paginationAjax("#pagination", "", "", "", "", "", "");
 }
