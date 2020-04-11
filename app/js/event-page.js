@@ -23,6 +23,7 @@ function getEventData(idEvent) {
       setTopTags(response.data);
       setBottomTags(response.data);
       setPromo(response.data);
+      setSocialLink(response.data);
     })
     .catch((error) => {
       console.log(error);
@@ -194,4 +195,20 @@ function renameBtn() {
 function goRedirectPage(id) {
   let redirectLink = "/redirect-page.html?id=" + id;
   document.location.href = redirectLink;
+}
+
+function setSocialLink(obj) {
+  let facebookEl = document.querySelector(".facebook");
+  let instagramEl = document.querySelector(".instagram");
+  let socialHrEl = document.querySelector("#hr_social_links");
+  if (obj.facebook_link !== null) {
+    facebookEl.href = obj.facebook_link;
+    facebookEl.classList.remove("hide_element");
+    socialHrEl.classList.remove("hide_element");
+  }
+  if (obj.instagram_link !== null) {
+    instagramEl.href = obj.instagram_link;
+    instagramEl.classList.remove("hide_element");
+    socialHrEl.classList.remove("hide_element");
+  }
 }
